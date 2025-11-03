@@ -8,15 +8,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Person> myFamily = new ArrayList<>();
-        myFamily.add(new Person("Jason", "Li", 92));
-        myFamily.add(new Person("Alwin", "Zhao", 25));
-        myFamily.add(new Person("Ahsan", "Baseer", 36));
-        myFamily.add(new Person("Harman", "Sing", 50));
-        myFamily.add(new Person("Jazzy", "Germosen", 5));
-        myFamily.add(new Person("Ashley", "Mendez", 21));
+        List<Person> myFriends = new ArrayList<>();
+        myFriends.add(new Person("Jason", "Li", 92));
+        myFriends.add(new Person("Alwin", "Zhao", 25));
+        myFriends.add(new Person("Ahsan", "Baseer", 36));
+        myFriends.add(new Person("Harman", "Sing", 50));
+        myFriends.add(new Person("Jazzy", "Germ", 5));
+        myFriends.add(new Person("Ashley", "Mendez", 21));
+        myFriends.add(new Person("Andy", "Ariza", 20));
+        myFriends.add(new Person("Denus", "Leon", 12));
 
-        Collections.sort(myFamily);
+        Collections.sort(myFriends);
+        for (Person p : myFriends) {
+            System.out.println(p.getFirstName() + " " + p.getLastName() + ", " + p.getAge());
+        }
     }
 
 }
