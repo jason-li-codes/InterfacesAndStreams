@@ -40,39 +40,52 @@ public class Main {
     // uses stream filters
     public static void streamFilterMethod(List<Person> myFriends) {
 
+        // gets user input for name to search
         System.out.println("Who are you searching for? Enter first or last name.");
         String userSearch = getValidString().toLowerCase();
         System.out.println("Here are people matching your search: ");
 
+        // checks if first and last names contain user input using stream filter, and printing out each result
         myFriends.stream()
                 .filter(p -> p.getFirstName().toLowerCase().contains(userSearch) ||
                         p.getLastName().toLowerCase().contains(userSearch))
                 .forEach(p -> System.out.println(p.getFirstName() + " " + p.getLastName() + ", " + p.getAge()));
 
+        // finds ageTotal using stream filter
         int ageTotal = myFriends.stream()
+                // first maps each Person's age onto the stream instead of the Person Object itself
                 .map(Person::getAge)
+                // with starting value of 0, add each age to a sum
                 .reduce(0, (sum, age) -> sum + age);
+        // finds total size of ArrayList
         int numOfFriends = myFriends.size();
+        // prints result
         System.out.printf("Average age of group: %d\n", ageTotal / numOfFriends);
 
+        // finds ageMin using stream filter
         int ageMin = myFriends.stream()
+                // first maps each Person's age onto the stream instead of the Person Object itself
                 .map(Person::getAge)
+                // with starting value of MAXVALUE, checks each age against the smallest age thus far
                 .reduce(Integer.MAX_VALUE, (ageSmaller, age) -> (ageSmaller > age) ? age : ageSmaller);
         System.out.printf("The youngest person in the group is %d years old.\n", ageMin);
-
+        // finds ageMax using stream filter
         int ageMax = myFriends.stream()
+                // first maps each Person's age onto the stream instead of the Person Object itself
                 .map(Person::getAge)
+                // with starting value of 0, checks each age against the biggest age thus far
                 .reduce(0, (ageBigger, age) -> (ageBigger < age) ? age : ageBigger);
         System.out.printf("The oldest person in the group is %d years old.\n", ageMax);
-
     }
 
     // uses traditional for loops
     public static void traditionalLoopsMethod(List<Person> myFriends) {
 
+        // gets user input for name to search
         System.out.println("Who are you searching for? Enter first or last name.");
         String userSearch = getValidString().toLowerCase();
         System.out.println("Here are people matching your search: ");
+        // uses forEach to check every first and last name for the user input String, printing it out along the way
         for (Person p: myFriends) {
             if (p.getFirstName().toLowerCase().contains(userSearch) ||
             p.getLastName().toLowerCase().contains(userSearch)) {
@@ -81,16 +94,21 @@ public class Main {
         }
         System.out.println("Search complete.");
 
+        // initializes 2 integers
         int counter = 0;
         int ageTotal = 0;
+        // for each Person, add 1 to counter and their age to ageTotal
         for (Person p : myFriends) {
             counter++;
             ageTotal += p.getAge();
         }
+        // prints the quotient as the average age
         System.out.printf("Average age of group: %d\n", ageTotal / counter);
 
+        // initializes ageMin and ageMax integers
         int ageMin = Integer.MAX_VALUE;
         int ageMax = 0;
+        // for each Person, check their age against ageMin and ageMax, updating appropriately
         for (Person p : myFriends) {
             if (p.getAge() < ageMin) {
                 ageMin = p.getAge();
@@ -99,7 +117,7 @@ public class Main {
                 ageMax = p.getAge();
             }
         }
-
+        // prints results
         System.out.printf("The youngest person in the group is %d years old.\n", ageMin);
         System.out.printf("The oldest person in the group is %d years old.\n", ageMax);
     }
